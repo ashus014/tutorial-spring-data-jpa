@@ -42,4 +42,6 @@ public class Course {
             referencedColumnName = "teacherId"
     )
     private Teacher teacher;
+
+
 }
