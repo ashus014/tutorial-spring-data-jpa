@@ -1,16 +1,14 @@
 package com.oashsing.tutorialspringdatajpa.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "course")
 public class CourseMaterial {
 
     @Id
@@ -26,7 +24,13 @@ public class CourseMaterial {
     private Long courseMaterialId;
     private String url;
 
-    @OneToOne
+    // cascade is required because once you pass a course material which needs a course input
+    // as well and course input is not present in database at that time.
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            optional = false
+    )
     @JoinColumn(
             name="course_id",
             referencedColumnName = "courseId"
