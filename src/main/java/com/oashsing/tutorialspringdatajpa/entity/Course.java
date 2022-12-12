@@ -32,4 +32,14 @@ public class Course {
             mappedBy = "course"
     )
     private CourseMaterial courseMaterial;
+
+    // Since this is just a code level change, the database will remain unchanged.
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "teacherId"
+    )
+    private Teacher teacher;
 }

@@ -36,7 +36,7 @@ class TeacherRepositoryTest {
         Teacher teacher = Teacher.builder()
                 .firstName("TeacherFirst")
                 .lastName("TeacherLast")
-                .courses(List.of(courseDBA, courseReact))
+//                .courses(List.of(courseDBA, courseReact))
                 .build();
 
         repository.save(teacher);
