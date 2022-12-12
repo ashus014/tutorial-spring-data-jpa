@@ -1,6 +1,7 @@
 package com.oashsing.tutorialspringdatajpa.repository;
 
 import com.oashsing.tutorialspringdatajpa.entity.Course;
+import com.oashsing.tutorialspringdatajpa.entity.Student;
 import com.oashsing.tutorialspringdatajpa.entity.Teacher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +75,30 @@ class CourseRepositoryTest {
 
         List<Course> courses = courseRepository.findByTitleContaining("D", firstPageTenRecords).getContent();
         System.out.println(courses);
+    }
+
+    @Test
+    public void saveCourseWithStudentAndTeacher() {
+
+        Teacher teacher = Teacher.builder()
+                .firstName("AI Walla")
+                .lastName("Teacher")
+                .build();
+
+        Student student = Student.builder()
+                .firstName("AI Walla")
+                .lastName("Student")
+                .emailId("ai@email.com")
+                .build();
+
+        Course course = Course.builder()
+                .title("AI")
+                .credit(5)
+                .teacher(teacher)
+                .build();
+
+        course.addStudents(student);
+
+        courseRepository.save(course);
     }
 }
